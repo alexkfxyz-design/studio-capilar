@@ -8,7 +8,14 @@ const esAdmin = () => new URLSearchParams(window.location.search).get('view') ==
 export default function App() {
   const [admin, setAdmin] = useState(esAdmin)
   useEffect(() => {
-    const h = () => { setAdmin(esAdmin()); window.scrollTo(0, 0) }
+    // Solo volver arriba al entrar o salir del panel; los enlaces a secciones (#servicios, #equipo…) se respetan
+    const h = () => {
+      const nuevo = esAdmin()
+      setAdmin((prev) => {
+        if (prev !== nuevo) window.scrollTo(0, 0)
+        return nuevo
+      })
+    }
     window.addEventListener('hashchange', h)
     return () => window.removeEventListener('hashchange', h)
   }, [])
