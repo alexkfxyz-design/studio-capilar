@@ -299,3 +299,5 @@ td.muted { max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-sp
   .side, .modal-head, .ticket-print .btn, .page-head, .pos, .kpis, .table-wrap { display: none !important; }
   .modal-bg { position: static; background: none; }
 }
+.setup { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; border-color: var(--gold); }
+.setup p { margin: 0; max-width: 620px; }

@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, PieChart, Pie, Cell } from 'recharts'
 import QRCode from 'qrcode'
-import { useCollection } from '../lib/db'
+import { useCollection, add } from '../lib/db'
+import { seed } from '../lib/seed'
 import { money, hoy, addDays, fechaCorta, hora12 } from '../lib/utils'
 import { Kpi, Badge, PageHead } from './ui.jsx'
 
@@ -10,8 +11,23 @@ const COLORS = ['#b8893f', '#2b2420', '#8a6d5a', '#d7b98a', '#5c4a3d', '#a39484'
 export default function Dashboard({ go }) {
   const [ventas] = useCollection('ventas')
   const [citas] = useCollection('citas')
-  const [productos] = useCollection('productos')
+  const [productos, cargandoProd] = useCollection('productos')
+  const [servicios, cargandoServ] = useCollection('servicios')
+  const [estilistas] = useCollection('estilistas')
   const [qr, setQr] = useState('')
+  const [cargando, setCargando] = useState(false)
+
+  // Carga servicios, equipo y productos de ejemplo (sin citas ni ventas falsas)
+  const cargarIniciales = async () => {
+    setCargando(true)
+    const d = seed()
+    const sinId = ({ id, ...r }) => r
+    if (!servicios.length) for (const x of d.servicios) await add('servicios', sinId(x))
+    if (!estilistas.length) for (const x of d.estilistas) await add('estilistas', sinId(x))
+    if (!productos.length) for (const x of d.productos) await add('productos', sinId(x))
+    setCargando(false)
+  }
+  const vacio = !cargandoServ && !cargandoProd && (servicios.length === 0 || estilistas.length === 0)
   const h = hoy(), mes = h.slice(0, 7)
   const urlWeb = window.location.href.split('?')[0]
 
@@ -40,6 +56,15 @@ export default function Dashboard({ go }) {
   return (
     <>
       <PageHead title="Resumen" />
+      {vacio && (
+        <div className="card setup">
+          <div>
+            <h3>Configuración inicial</h3>
+            <p className="muted">Tu base de datos está vacía. Carga una lista base de servicios, equipo y productos y luego edítalos con los datos reales (precios, nombres, fotos).</p>
+          </div>
+          <button className="btn btn-gold" disabled={cargando} onClick={cargarIniciales}>{cargando ? 'Cargando…' : 'Cargar datos iniciales'}</button>
+        </div>
+      )}
       <div className="kpis">
         <Kpi label="Ingresos hoy" value={money(d.ingHoy)} sub={`${d.cHoy.length} citas agendadas`} />
         <Kpi label="Ingresos del mes" value={money(d.ingMes)} sub={`${d.nMes} atenciones`} />
