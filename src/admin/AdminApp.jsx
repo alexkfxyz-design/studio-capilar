@@ -44,6 +44,11 @@ export default function AdminApp() {
           <button className="link" onClick={logout}>Cerrar sesión</button>
         </div>
       </aside>
+      <header className="m-top">
+        <div className="m-logo">{NEGOCIO.nombre}</div>
+        <a href="#inicio" className="m-link">Ver web</a>
+        <button className="m-link" onClick={logout}>Salir</button>
+      </header>
       <main className="main"><Comp go={go} /></main>
     </div>
   )

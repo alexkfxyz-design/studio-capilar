@@ -35,8 +35,8 @@ function Crud({ titulo, col, campos, vacio, columnas, imgKey }) {
             {lista.map((r) => (
               <tr key={r.id} className="click" onClick={() => setEdit({ ...r })}>
                 <td className="thumb">{r[imgKey] ? <img src={r[imgKey]} alt="" /> : <div className="avatar sm">{iniciales(r.nombre)}</div>}</td>
-                {columnas.map((c) => <td key={c.key} className={c.r ? 'r' : ''}>{c.fmt ? c.fmt(r[c.key], r) : r[c.key]}</td>)}
-                <td>{r.activo === false ? <span className="badge off">Oculto</span> : <span className="badge on">Visible</span>}</td>
+                {columnas.map((c, i) => <td key={c.key} data-label={c.label} className={(c.r ? 'r ' : '') + (i === 0 ? 'cell-title' : '')}>{c.fmt ? c.fmt(r[c.key], r) : r[c.key]}</td>)}
+                <td data-label="Estado">{r.activo === false ? <span className="badge off">Oculto</span> : <span className="badge on">Visible</span>}</td>
               </tr>
             ))}
             {!lista.length && <tr><td colSpan={columnas.length + 2} className="muted center">Sin registros.</td></tr>}

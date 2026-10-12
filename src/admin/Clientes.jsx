@@ -54,10 +54,10 @@ export default function Clientes() {
               const d = diasDesde(c.ultima)
               return (
                 <tr key={c.telefono + c.nombre}>
-                  <td><b>{c.nombre}</b>{c.faltas > 0 && <small className="err"> · {c.faltas} falta(s)</small>}</td>
-                  <td>{c.telefono}</td><td className="r">{c.visitas}</td><td className="r">{money(c.gastado)}</td>
-                  <td>{c.ultima ? `${c.ultima} (${d === 0 ? 'hoy' : `hace ${d} d`})` : '—'}</td>
-                  <td>{c.telefono && <a className="link" target="_blank" rel="noreferrer" href={linkWhatsApp('51' + c.telefono, `Hola ${c.nombre.split(' ')[0]}, te saluda ${NEGOCIO.nombre} 💇 ¡Te extrañamos! Reserva tu próxima cita aquí: ${location.href.split('?')[0]}#reserva`)}>WhatsApp</a>}</td>
+                  <td className="cell-title"><b>{c.nombre}</b>{c.faltas > 0 && <small className="err"> · {c.faltas} falta(s)</small>}</td>
+                  <td data-label="Celular">{c.telefono || '—'}</td><td data-label="Visitas" className="r">{c.visitas}</td><td data-label="Gastado" className="r">{money(c.gastado)}</td>
+                  <td data-label="Última visita">{c.ultima ? `${c.ultima} (${d === 0 ? 'hoy' : `hace ${d} d`})` : '—'}</td>
+                  <td className="cell-act">{c.telefono && <a className="link" target="_blank" rel="noreferrer" href={linkWhatsApp('51' + c.telefono, `Hola ${c.nombre.split(' ')[0]}, te saluda ${NEGOCIO.nombre} 💇 ¡Te extrañamos! Reserva tu próxima cita aquí: ${location.href.split('?')[0]}#reserva`)}>WhatsApp</a>}</td>
                 </tr>
               )
             })}

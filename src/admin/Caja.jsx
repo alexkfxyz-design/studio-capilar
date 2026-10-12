@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useCollection, registrarVenta } from '../lib/db'
 import { money, hoy, hora12, exportarExcel, addDays } from '../lib/utils'
 import { METODOS_PAGO } from '../config'
@@ -20,6 +20,7 @@ function POS({ inicial, cita, onDone }) {
   const [recibido, setRecibido] = useState('')
   const [q, setQ] = useState('')
   const [guardando, setGuardando] = useState(false)
+  const ticketRef = useRef(null)
 
   const agregar = (tipo, x) => setItems((its) => {
     const i = its.findIndex((it) => it.refId === x.id && it.tipo === tipo)
@@ -53,8 +54,13 @@ function POS({ inicial, cita, onDone }) {
         <div className="pos-grid">{servicios.filter(match).map((s) => <button key={s.id} onClick={() => agregar('servicio', s)}><span>{s.nombre}</span><b>{money(s.precio)}</b></button>)}</div>
         <h4>Productos</h4>
         <div className="pos-grid">{productos.filter(match).map((p) => <button key={p.id} disabled={Number(p.stock) <= 0} onClick={() => agregar('producto', p)}><span>{p.nombre}</span><b>{money(p.precio)}</b><small>stock {p.stock}</small></button>)}</div>
+        {items.length > 0 && (
+          <button className="pos-jump" onClick={() => ticketRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+            <span>Ver ticket ({items.reduce((n, i) => n + i.cantidad, 0)})</span><b>{money(total)} →</b>
+          </button>
+        )}
       </div>
-      <div className="pos-ticket card">
+      <div className="pos-ticket card" ref={ticketRef}>
         <div className="form-2">
           <label>Cliente<input value={cliente} onChange={(e) => setCliente(e.target.value)} placeholder="Opcional" /></label>
           <label>Celular<input value={telefono} onChange={(e) => setTelefono(e.target.value)} placeholder="Opcional" /></label>
@@ -129,9 +135,9 @@ export default function Caja() {
           <tbody>
             {lista.map((v) => (
               <tr key={v.id} onClick={() => setVer(v)} className="click">
-                <td>{v.fecha.slice(5)} {hora12(v.hora)}</td><td>{v.cliente}</td>
-                <td className="muted">{v.items.map((i) => i.nombre).join(', ')}</td>
-                <td>{v.estilistaNombre?.split(' ')[0]}</td><td>{v.metodo}</td><td className="r"><b>{money(v.total)}</b></td>
+                <td data-label="Fecha">{v.fecha.slice(5)} {hora12(v.hora)}</td><td data-label="Cliente" className="cell-title">{v.cliente}</td>
+                <td data-label="Detalle" className="muted">{v.items.map((i) => i.nombre).join(', ')}</td>
+                <td data-label="Atendió">{v.estilistaNombre?.split(' ')[0] || '—'}</td><td data-label="Método">{v.metodo}</td><td data-label="Total" className="r"><b>{money(v.total)}</b></td>
               </tr>
             ))}
             {!lista.length && <tr><td colSpan="6" className="muted center">Sin ventas en este rango.</td></tr>}
