@@ -3,7 +3,7 @@ import { BotonConfirmar } from './ui.jsx'
 import { useAuth, login, logout, DEMO_USER } from '../lib/auth'
 import { modoDemo, reiniciarDemo } from '../lib/db'
 import { NEGOCIO } from '../config'
-import { LOGO, LOGO_LN } from '../lib/brand'
+import { LOGO_LN } from '../lib/brand'
 import Dashboard from './Dashboard.jsx'
 import Agenda from './Agenda.jsx'
 import Caja from './Caja.jsx'
@@ -66,7 +66,11 @@ function Login() {
   }
   return (
     <div className="login-wrap">
-      <img src={LOGO} alt={NEGOCIO.nombre} className="login-logo" />
+      <div className="login-logo" role="img" aria-label={NEGOCIO.nombre}>
+        <img src={LOGO_LN} alt="" />
+        <div className="mark-name">{NEGOCIO.nombre}</div>
+        <div className="mark-tag">{NEGOCIO.slogan}</div>
+      </div>
       <form className="login card" onSubmit={submit}>
         <h1>Panel de gestión</h1>
         <p className="muted">Ingresa con tu cuenta del salón.</p>

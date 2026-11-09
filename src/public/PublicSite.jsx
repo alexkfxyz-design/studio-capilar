@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { NEGOCIO, CATEGORIAS } from '../config'
 import { useCollection, modoDemo } from '../lib/db'
 import { money, iniciales, linkWhatsApp } from '../lib/utils'
-import { LOGO, LOGO_LN } from '../lib/brand'
+import { LOGO_LN } from '../lib/brand'
 import Reserva from './Reserva.jsx'
 
 const reduceMotion = () => {
@@ -72,7 +72,7 @@ export default function PublicSite() {
   }, [])
 
   const reservar = (s) => { setPreSel(s?.id || null); document.getElementById('reserva')?.scrollIntoView({ behavior: 'smooth' }) }
-  const shine = { WebkitMaskImage: `url(${LOGO})`, maskImage: `url(${LOGO})` }
+  const shine = { WebkitMaskImage: `url(${LOGO_LN})`, maskImage: `url(${LOGO_LN})` }
 
   return (
     <div className={'pub' + (reveal ? ' reveal-on' : '')} ref={rootRef}>
@@ -106,9 +106,13 @@ export default function PublicSite() {
           <div className="hero-mark">
             <div className="ring r1" />
             <div className="ring r2" />
-            <div className="mark">
-              <img src={LOGO} alt={`${NEGOCIO.nombre} · ${NEGOCIO.slogan}`} />
-              <span className="mark-shine" style={shine} />
+            <div className="mark" role="img" aria-label={`${NEGOCIO.nombre} · ${NEGOCIO.slogan}`}>
+              <div className="mark-ln">
+                <img src={LOGO_LN} alt="" />
+                <span className="mark-shine" style={shine} />
+              </div>
+              <div className="mark-name">{NEGOCIO.nombre}</div>
+              <div className="mark-tag">{NEGOCIO.slogan}</div>
             </div>
           </div>
 
