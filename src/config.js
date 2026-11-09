@@ -1,6 +1,6 @@
 // ⚙️ Datos del negocio: cámbialos por los de la peluquería real.
 export const NEGOCIO = {
-  nombre: 'Studio Capilar',
+  nombre: 'Look Nais',
   slogan: 'Peluquería & Barbería',
   descripcion: 'Cortes, color y tratamientos con estilistas profesionales. Reserva tu cita en menos de un minuto.',
   whatsapp: '51999999999',            // con código de país, sin + ni espacios
@@ -19,7 +19,7 @@ export const NEGOCIO = {
   },
   diasMaxReserva: 30,       // hasta cuántos días adelante se puede reservar
 }
-
+ 
 export const CATEGORIAS = ['Cortes', 'Barbería', 'Color', 'Tratamientos', 'Uñas', 'Otros']
 export const METODOS_PAGO = ['Efectivo', 'Yape', 'Plin', 'Tarjeta', 'Transferencia']
 export const ESTADOS = {
