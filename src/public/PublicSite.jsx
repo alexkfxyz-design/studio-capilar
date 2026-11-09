@@ -218,12 +218,14 @@ export default function PublicSite() {
             <dl className="info">
               <div><dt>Dirección</dt><dd>{NEGOCIO.direccion}</dd></div>
               <div><dt>Horario</dt><dd>{NEGOCIO.horario.texto}</dd></div>
-              <div><dt>Teléfono</dt><dd>{NEGOCIO.telefono}</dd></div>
+              <div><dt>WhatsApp</dt><dd><a href={linkWhatsApp(NEGOCIO.whatsapp, `Hola ${NEGOCIO.nombre}, quisiera información.`)} target="_blank" rel="noreferrer">{NEGOCIO.telefono}</a></dd></div>
+              {NEGOCIO.tiktok && <div><dt>TikTok</dt><dd><a href={NEGOCIO.tiktok} target="_blank" rel="noreferrer">@{NEGOCIO.tiktok.split('@')[1]}</a></dd></div>}
             </dl>
             <div className="hero-cta">
               <a className="btn btn-dark" href={NEGOCIO.mapaUrl} target="_blank" rel="noreferrer">Cómo llegar</a>
-              <a className="btn btn-ghost dark" href={NEGOCIO.instagram} target="_blank" rel="noreferrer">Instagram</a>
-              <a className="btn btn-ghost dark" href={NEGOCIO.facebook} target="_blank" rel="noreferrer">Facebook</a>
+              {NEGOCIO.tiktok && <a className="btn btn-ghost dark" href={NEGOCIO.tiktok} target="_blank" rel="noreferrer">TikTok</a>}
+              {NEGOCIO.instagram && <a className="btn btn-ghost dark" href={NEGOCIO.instagram} target="_blank" rel="noreferrer">Instagram</a>}
+              {NEGOCIO.facebook && <a className="btn btn-ghost dark" href={NEGOCIO.facebook} target="_blank" rel="noreferrer">Facebook</a>}
             </div>
           </div>
           <div className="contact-mark" data-reveal style={{ '--d': 2 }} aria-hidden="true"><img src={LOGO_LN} alt="" /></div>
@@ -234,6 +236,7 @@ export default function PublicSite() {
         <img src={LOGO_LN} alt="" width="54" height="47" />
         <b>{NEGOCIO.nombre}</b>
         <small>{NEGOCIO.slogan}</small>
+        <p className="foot-info">{NEGOCIO.direccion}<br />WhatsApp {NEGOCIO.telefono}{NEGOCIO.tiktok && <> · <a href={NEGOCIO.tiktok} target="_blank" rel="noreferrer">TikTok</a></>}</p>
         <p>© {new Date().getFullYear()} {NEGOCIO.nombre} · <a href="#admin">Acceso personal</a></p>
       </footer>
 
