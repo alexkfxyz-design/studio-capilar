@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "peluqueriasystem-3fed6"
+  },
+  "targets": {
+    "peluqueriasystem-3fed6": {
+      "hosting": {
+        "web": [
+          "look-nice"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
