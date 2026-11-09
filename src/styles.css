@@ -237,7 +237,8 @@ img { max-width: 100%; display: block; }
 .pub-foot a { color: var(--gold); }
 
 /* whatsapp */
-.wa-float { position: fixed; right: 20px; bottom: 20px; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; text-decoration: none; box-shadow: 0 10px 26px rgba(0,0,0,.3); z-index: 30; transition: transform .3s; }
+/* subido para no chocar con la insignia "Powered by Netlify" (abajo a la derecha) */
+.wa-float { position: fixed; right: 20px; bottom: calc(78px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; text-decoration: none; box-shadow: 0 10px 26px rgba(0,0,0,.3); z-index: 30; transition: transform .3s; }
 .wa-float:hover { transform: scale(1.08); }
 .wa-float::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #25d366; animation: pulse 2.6s ease-out infinite; }
 
@@ -318,7 +319,7 @@ img { max-width: 100%; display: block; }
   .pick-card { padding: 14px 8px; }
   .slots { grid-template-columns: repeat(3, 1fr); }
   .info div { grid-template-columns: 1fr; gap: 4px; }
-  .wa-float { right: 14px; bottom: 14px; width: 54px; height: 54px; }
+  .wa-float { right: 14px; bottom: calc(70px + env(safe-area-inset-bottom, 0px)); width: 54px; height: 54px; }
 }
 
 /* ---------- formularios ---------- */
