@@ -7,6 +7,7 @@ export const NEGOCIO = {
   telefono: '+51 973 061 389',
   direccion: 'Ramiro Prialé R-16, Alto Selva Alegre, Arequipa',
   mapaUrl: 'https://maps.app.goo.gl/c9n7ca5r2TYQbzLD8',
+  ubicacion: { lat: -16.376846, lng: -71.519462 },   // para el mapa interactivo
   tiktok: 'https://www.tiktok.com/@studio.salon.look.nice',
   instagram: '',                       // déjalo vacío si no tienen; el botón se oculta solo
   facebook: '',
@@ -30,3 +31,4 @@ export const ESTADOS = {
   cancelada: { label: 'Cancelada', color: '#b23b3b' },
   noasistio: { label: 'No asistió', color: '#777' },
 }
+ 

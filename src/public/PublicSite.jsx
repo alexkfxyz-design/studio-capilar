@@ -228,7 +228,20 @@ export default function PublicSite() {
               {NEGOCIO.facebook && <a className="btn btn-ghost dark" href={NEGOCIO.facebook} target="_blank" rel="noreferrer">Facebook</a>}
             </div>
           </div>
-          <div className="contact-mark" data-reveal style={{ '--d': 2 }} aria-hidden="true"><img src={LOGO_LN} alt="" /></div>
+          <div className="map-card" data-reveal style={{ '--d': 2 }}>
+            <iframe
+              title={`Ubicación de ${NEGOCIO.nombre} en Google Maps`}
+              src={`https://www.google.com/maps?q=${NEGOCIO.ubicacion.lat},${NEGOCIO.ubicacion.lng}&z=17&hl=es&output=embed`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <a className="map-foot" href={NEGOCIO.mapaUrl} target="_blank" rel="noreferrer">
+              <img src={LOGO_LN} alt="" width="30" height="26" />
+              <span><b>{NEGOCIO.nombre}</b><small>{NEGOCIO.direccion}</small></span>
+              <em>Abrir en Maps ↗</em>
+            </a>
+          </div>
         </div>
       </section>
 
