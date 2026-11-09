@@ -6,7 +6,7 @@ import { seed } from '../lib/seed'
 import { money, hoy, addDays, fechaCorta, hora12 } from '../lib/utils'
 import { Kpi, Badge, PageHead } from './ui.jsx'
 
-const COLORS = ['#b8893f', '#2b2420', '#8a6d5a', '#d7b98a', '#5c4a3d', '#a39484']
+const COLORS = ['#c6a467', '#17181b', '#8c6a31', '#e9d6ab', '#4a4c52', '#a39a8a']
 
 export default function Dashboard({ go }) {
   const [ventas] = useCollection('ventas')
@@ -81,7 +81,7 @@ export default function Dashboard({ go }) {
               <XAxis dataKey="dia" fontSize={11} tickLine={false} />
               <YAxis fontSize={11} tickLine={false} axisLine={false} />
               <Tooltip formatter={(v) => money(v)} />
-              <Bar dataKey="total" fill="#b8893f" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="total" fill="#c6a467" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -115,7 +115,7 @@ export default function Dashboard({ go }) {
               <XAxis type="number" hide />
               <YAxis type="category" dataKey="name" width={70} fontSize={12} tickLine={false} axisLine={false} />
               <Tooltip formatter={(v) => money(v)} />
-              <Bar dataKey="total" fill="#2b2420" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="total" fill="#2a2c31" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
           {stockBajo.length > 0 && <p className="warn">⚠ Stock bajo: {stockBajo.map((p) => `${p.nombre} (${p.stock})`).join(', ')}</p>}

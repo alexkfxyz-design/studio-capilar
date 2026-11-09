@@ -3,6 +3,7 @@ import { BotonConfirmar } from './ui.jsx'
 import { useAuth, login, logout, DEMO_USER } from '../lib/auth'
 import { modoDemo, reiniciarDemo } from '../lib/db'
 import { NEGOCIO } from '../config'
+import { LOGO, LOGO_LN } from '../lib/brand'
 import Dashboard from './Dashboard.jsx'
 import Agenda from './Agenda.jsx'
 import Caja from './Caja.jsx'
@@ -31,7 +32,7 @@ export default function AdminApp() {
   return (
     <div className="admin">
       <aside className="side">
-        <div className="side-logo">{NEGOCIO.nombre}<small>Panel de gestión</small></div>
+        <div className="side-logo"><img src={LOGO_LN} alt="" /><div>{NEGOCIO.nombre}<small>Panel de gestión</small></div></div>
         <nav>
           {TABS.map(([id, ic, label]) => (
             <button key={id} className={tab === id ? 'on' : ''} onClick={() => go(id)}><span>{ic}</span>{label}</button>
@@ -45,7 +46,7 @@ export default function AdminApp() {
         </div>
       </aside>
       <header className="m-top">
-        <div className="m-logo">{NEGOCIO.nombre}</div>
+        <div className="m-logo"><img src={LOGO_LN} alt="" width="28" height="24" />{NEGOCIO.nombre}</div>
         <a href="#inicio" className="m-link">Ver web</a>
         <button className="m-link" onClick={logout}>Salir</button>
       </header>
@@ -65,9 +66,10 @@ function Login() {
   }
   return (
     <div className="login-wrap">
+      <img src={LOGO} alt={NEGOCIO.nombre} className="login-logo" />
       <form className="login card" onSubmit={submit}>
-        <h1>{NEGOCIO.nombre}</h1>
-        <p className="muted">Acceso al panel de gestión</p>
+        <h1>Panel de gestión</h1>
+        <p className="muted">Ingresa con tu cuenta del salón.</p>
         <label>Correo<input type="email" required value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} /></label>
         <label>Contraseña<input type="password" required value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} /></label>
         {err && <p className="err">{err}</p>}
