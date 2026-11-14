@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { NEGOCIO, CATEGORIAS } from '../config'
 import { useCollection, modoDemo } from '../lib/db'
 import { money, iniciales, linkWhatsApp } from '../lib/utils'
-import { LOGO_LN } from '../lib/brand'
+import { LOGO_LN, HERO_FOTOS } from '../lib/brand'
 import Reserva from './Reserva.jsx'
 
 const reduceMotion = () => {
@@ -44,6 +44,34 @@ function Contador({ valor }) {
     return () => { clearTimeout(espera); cancelAnimationFrame(raf) }
   }, [valor])
   return n
+}
+
+// Fotos de fondo de la portada: cambian solas con un fundido suave
+function HeroFotos() {
+  const [i, setI] = useState(0)
+  const quieto = reduceMotion()
+  useEffect(() => {
+    if (quieto || HERO_FOTOS.length < 2) return
+    const t = setInterval(() => setI((n) => (n + 1) % HERO_FOTOS.length), 6000)
+    return () => clearInterval(t)
+  }, [quieto])
+  return (
+    <>
+      <div className="hero-photos" aria-hidden="true">
+        {HERO_FOTOS.map((f, k) => (
+          <img key={f.src} src={f.src} alt="" className={k === i ? 'on' : ''} style={{ objectPosition: f.pos }}
+            loading={k === 0 ? 'eager' : 'lazy'} fetchpriority={k === 0 ? 'high' : 'auto'} />
+        ))}
+      </div>
+      {HERO_FOTOS.length > 1 && (
+        <div className="hero-dots" role="tablist" aria-label="Fotos del salón">
+          {HERO_FOTOS.map((f, k) => (
+            <button key={f.src} role="tab" aria-selected={k === i} aria-label={f.alt} className={k === i ? 'on' : ''} onClick={() => setI(k)}><span /></button>
+          ))}
+        </div>
+      )}
+    </>
+  )
 }
 
 export default function PublicSite() {
@@ -92,7 +120,9 @@ export default function PublicSite() {
       </header>
 
       <section id="inicio" className="hero">
+        <HeroFotos />
         <div className="hero-bg" aria-hidden="true">
+          <div className="hero-veil" />
           <div className="glow g1" />
           <div className="glow g2" />
           <svg className="waves" viewBox="0 0 1440 600" preserveAspectRatio="none">

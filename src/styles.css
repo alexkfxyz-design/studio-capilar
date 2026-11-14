@@ -97,10 +97,21 @@ img { max-width: 100%; display: block; }
 /* hero */
 .hero { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 70% 30%, #2a2c31 0%, var(--ink) 60%); color: var(--ivory); padding: clamp(120px, 14vw, 170px) clamp(16px, 5vw, 64px) clamp(80px, 9vw, 120px); min-height: min(100vh, 900px); display: flex; align-items: center; }
 .hero-bg { position: absolute; inset: 0; pointer-events: none; }
+/* fotos de fondo + velo oscuro para que el texto y el logo se lean bien */
+.hero-photos { position: absolute; inset: 0; overflow: hidden; background: var(--ink); }
+.hero-photos img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.12); filter: saturate(.85) brightness(.9); transition: opacity 1.8s ease, transform 8s ease-out; }
+.hero-photos img.on { opacity: 1; transform: scale(1); }
+.hero-veil { position: absolute; inset: 0; background:
+  linear-gradient(90deg, rgba(23,24,27,.93) 0%, rgba(23,24,27,.8) 42%, rgba(23,24,27,.68) 68%, rgba(23,24,27,.8) 100%),
+  linear-gradient(180deg, rgba(23,24,27,.55) 0%, rgba(23,24,27,0) 30%, rgba(23,24,27,0) 70%, rgba(23,24,27,.9) 100%); }
+.hero-dots { position: absolute; z-index: 2; left: 50%; bottom: 78px; transform: translateX(-50%); display: flex; gap: 6px; }
+.hero-dots button { background: none; border: 0; padding: 8px 2px; }
+.hero-dots span { display: block; width: 26px; height: 2px; border-radius: 2px; background: rgba(243,238,228,.35); transition: background .4s, width .4s; }
+.hero-dots button.on span { width: 44px; background: var(--gold); }
 .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .5; }
 .glow.g1 { width: 520px; height: 520px; right: 8%; top: 10%; background: radial-gradient(circle, rgba(198,164,103,.38), transparent 65%); animation: float1 14s ease-in-out infinite; }
 .glow.g2 { width: 420px; height: 420px; left: -6%; bottom: -10%; background: radial-gradient(circle, rgba(198,164,103,.18), transparent 65%); animation: float2 18s ease-in-out infinite; }
-.waves { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 70%; opacity: .55; }
+.waves { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 70%; opacity: .4; }
 .waves path { fill: none; stroke: var(--gold); stroke-width: 1; stroke-dasharray: 2200; stroke-dashoffset: 2200; animation: draw 3.2s cubic-bezier(.4,0,.2,1) forwards, sway 12s ease-in-out 3.2s infinite; }
 .waves path:nth-child(2) { opacity: .6; animation-delay: .25s, 3.45s; }
 .waves path:nth-child(3) { opacity: .35; animation-delay: .5s, 3.7s; }
@@ -315,6 +326,8 @@ img { max-width: 100%; display: block; }
   .hero-facts { margin-top: 34px; gap: 22px; }
   .hero-facts b { font-size: 30px; }
   .scroll-cue { display: none; }
+  .hero-veil { background: linear-gradient(180deg, rgba(23,24,27,.78) 0%, rgba(23,24,27,.72) 40%, rgba(23,24,27,.9) 75%, rgba(23,24,27,.97) 100%); }
+  .hero-dots { bottom: 26px; }
   .waves { opacity: .22; height: 45%; }
   .glow.g1 { width: 320px; height: 320px; }
   .band { padding: 64px 16px; }
